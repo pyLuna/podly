@@ -2,7 +2,9 @@ import { clean, toQueryString } from "@/utils/record";
 
 class Fetcher {
   private requestInit: RequestInit = {
-    "X-ListenAPI-Key": process.env.LISTEN_API_KEY,
+    headers: {
+      "X-ListenAPI-Key": process.env.LISTEN_API_KEY ?? "",
+    },
   } as RequestInit;
 
   /**

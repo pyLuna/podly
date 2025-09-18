@@ -26,7 +26,7 @@ export default function GenresPage() {
               <li key={genre.id}>
                 <Link
                   className="hover:underline hover:text-primary duration-300"
-                  href={`/genres/${genre.id}`}
+                  href={`/genres/${genre.name}/${genre.id}`}
                 >
                   {genre.name}
                 </Link>
