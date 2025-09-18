@@ -24,7 +24,7 @@ export default function LeftSideBar() {
     >
       {icon}
       <small
-        className={`text-xs text-muted-foreground/50 duration-300 ${
+        className={`text-xs text-muted-foreground/90 duration-300 ${
           pathname === href ? "text-primary" : ""
         }`}
       >
@@ -34,7 +34,7 @@ export default function LeftSideBar() {
   );
 
   return (
-    <nav className="h-full p-4 border-r-border bg-foreground text-background flex flex-col justify-center gap-8">
+    <nav className="h-full p-4 border-r-border bg-background text-foreground flex flex-col justify-center gap-8">
       <Button
         href="/"
         text="Best"
