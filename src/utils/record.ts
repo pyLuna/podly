@@ -23,8 +23,13 @@ export const clean = (record?: Record<string, unknown>) => {
  * @param params The record of parameters to convert.
  * @returns The query string representation of the parameters.
  */
-// @ts-ignore
-export const toQueryString = (params: Record<string, any>) => {
-  const query = new URLSearchParams(params);
+export const toQueryString = (params: Record<string, unknown>) => {
+  const stringParams: Record<string, string> = {};
+  for (const [key, value] of Object.entries(params)) {
+    if (value !== null && value !== undefined) {
+      stringParams[key] = String(value);
+    }
+  }
+  const query = new URLSearchParams(stringParams);
   return query.toString() ? `?${query.toString()}` : "";
 };
