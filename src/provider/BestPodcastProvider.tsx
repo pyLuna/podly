@@ -1,5 +1,6 @@
 "use client";
 import { getPodcastById } from "@/service/best_podcast.service";
+import { Podcast } from "@/types/podcast.type";
 import { useQuery } from "@tanstack/react-query";
 import {
   createContext,
@@ -10,7 +11,7 @@ import {
 } from "react";
 
 type BestPodcastContextType = {
-  podcasts: any;
+  podcasts: Podcast[];
   setPodcastId: Dispatch<SetStateAction<number>>;
   isLoading: boolean;
   isError: boolean;

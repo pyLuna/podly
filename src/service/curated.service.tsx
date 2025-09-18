@@ -2,7 +2,7 @@
 import fetcher from "./fetcher";
 
 export const getCuratedPodcasts = async (page?: number) => {
-  const options: Record<string, any> = page ? { page: page } : {};
+  const options: Record<string, unknown> = page ? { page: page } : {};
   const res = await fetcher._get("/curated_podcasts", options);
 
   if (!res.ok) {

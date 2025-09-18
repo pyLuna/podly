@@ -16,7 +16,7 @@ export default function PodcastList({ id }: { id: number }) {
   useEffect(() => {
     setPodcastId(id);
     console.log("PodcastList - useEffect - id changed:", id);
-    refetch && refetch();
+    refetch?.();
   }, [id]);
 
   return (

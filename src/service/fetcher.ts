@@ -11,7 +11,7 @@ class Fetcher {
    * @param params The query parameters to include in the request.
    * @returns The fetch request promise.
    */
-  async _get(path: string, params?: Record<string, any>) {
+  async _get(path: string, params?: Record<string, unknown>) {
     const options = clean(params);
     const queryString = toQueryString(options);
     const uri = `${process.env.LISTEN_BASE_URL}${path}${queryString}`;

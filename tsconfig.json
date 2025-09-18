@@ -13,7 +13,6 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "noImplicitAny": false,
     "plugins": [
       {
         "name": "next"
@@ -24,10 +23,5 @@
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"],
-  "eslintConfig": {
-    "rules": {
-      "@typescript-eslint/no-explicit-any": "off"
-    }
-  }
+  "exclude": ["node_modules"]
 }
