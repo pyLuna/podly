@@ -41,7 +41,12 @@ export default function PodcastList({ id }: { id: number }) {
             podcast={podcast}
           />
         ))}
-      <div ref={ref}></div>
+      <div
+        ref={ref}
+        className="space-y-4"
+      >
+        <PodcastListSkeleton />
+      </div>
     </>
   );
 }
