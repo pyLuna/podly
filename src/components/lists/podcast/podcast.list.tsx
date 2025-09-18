@@ -17,12 +17,10 @@ export default function PodcastList({ id }: { id: number }) {
     isLoading,
     fetchNextPage,
     refetch,
-    page,
   } = useBestPodcast();
 
   useEffect(() => {
     if (inView) {
-      console.log("In view - page:", page);
       fetchNextPage?.();
     }
   }, [inView]);

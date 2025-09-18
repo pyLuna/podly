@@ -15,7 +15,6 @@ type BestPodcastContextType = {
   setPodcastId: Dispatch<SetStateAction<number>>;
   isLoading: boolean;
   isError: boolean;
-  page: number;
   fetchNextPage?: () => void;
   refetch?: () => void;
 };
@@ -28,12 +27,10 @@ export default function BestPodcastProvider({
   children: React.ReactNode;
 }) {
   const [podcastId, setPodcastId] = useState<number>(127);
-  const [page, setPage] = useState<number>(0);
 
   const best_podcast = useInfiniteQuery({
     queryKey: ["best_podcast", podcastId],
     queryFn: (context) => {
-      setPage(context.pageParam ?? 0);
       return getPodcastById(podcastId, context.pageParam);
     },
     getNextPageParam: (lastPage) => {
@@ -46,7 +43,7 @@ export default function BestPodcastProvider({
     initialPageParam: 0,
     retry: 1,
     enabled: podcastId !== null,
-    maxPages: 10,
+    maxPages: 2, // change the limit of pages to 5 in the future
   });
 
   return (
@@ -56,7 +53,6 @@ export default function BestPodcastProvider({
           best_podcast.data?.pages.flatMap((page) => page.podcasts) || [],
         fetchNextPage: best_podcast.fetchNextPage,
         setPodcastId,
-        page,
         isLoading: best_podcast.isLoading,
         isError: best_podcast.isError,
         refetch: best_podcast.refetch,
