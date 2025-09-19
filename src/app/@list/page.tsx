@@ -1,5 +1,5 @@
-import MainPageComponent from "@/components/page/Main.Page";
+import MainListComponent from "@/components/page/Main.List";
 
 export default function MainPage() {
-  return <MainPageComponent />;
+  return <MainListComponent />;
 }

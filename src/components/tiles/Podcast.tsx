@@ -2,7 +2,13 @@ import { Podcast } from "@/types/podcast.type";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function PodcastTile({ podcast }: { podcast: Podcast }) {
+export default function PodcastTile({
+  podcast,
+  onClick,
+}: {
+  podcast: Podcast;
+  onClick: (podcastId: string) => void;
+}) {
   const getMins = (secs: number) => {
     return Math.floor(secs / 60);
   };
@@ -10,6 +16,7 @@ export default function PodcastTile({ podcast }: { podcast: Podcast }) {
   return (
     <Link
       href="#"
+      onClick={onClick.bind(null, podcast.id)}
       className="group duration-300"
     >
       <div className="flex items-start justify-start gap-4 p-2 border border-border rounded-md group-hover:border-primary duration-300">

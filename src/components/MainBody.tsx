@@ -1,5 +1,6 @@
 "use client";
 import BestPodcastProvider from "@/provider/BestPodcastProvider";
+import PodcastProvider from "@/provider/PodcastProvider";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactNode } from "react";
 
@@ -14,10 +15,12 @@ export default function MainBody({
 }) {
   return (
     <QueryClientProvider client={query}>
-      <BestPodcastProvider>
-        {list}
-        {player}
-      </BestPodcastProvider>
+      <PodcastProvider>
+        <BestPodcastProvider>
+          {list}
+          {player}
+        </BestPodcastProvider>
+      </PodcastProvider>
     </QueryClientProvider>
   );
 }

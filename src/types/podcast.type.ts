@@ -11,3 +11,22 @@ export interface Podcast {
   country: string;
   total_episodes: number;
 }
+
+export interface Episode {
+  id: string;
+  link: string;
+  audio: string;
+  image: string;
+  title: string;
+  thumbnail: string;
+  description: string;
+  audio_length_sec: number;
+  explicit_content: boolean;
+}
+
+export interface DetailedPodcast extends Omit<Podcast, "audio"> {
+  episodes: Episode[];
+  next_episode_pub_date: number;
+  earliest_pub_date_ms: number;
+  latest_pub_date_ms: number;
+}

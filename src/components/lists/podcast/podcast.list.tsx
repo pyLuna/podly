@@ -1,12 +1,14 @@
 "use client";
 import PodcastTile from "@/components/tiles/Podcast";
 import { useBestPodcast } from "@/provider/BestPodcastProvider";
+import { useDetailedPodcast } from "@/provider/PodcastProvider";
 import { Podcast } from "@/types/podcast.type";
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import PodcastListSkeleton from "./podcast.skeleton";
 
 export default function PodcastList({ id }: { id: number }) {
+  const { setPodcastId: setDetailedPodcastId } = useDetailedPodcast();
   const { ref, inView } = useInView({
     rootMargin: "1000px",
   });
@@ -42,6 +44,7 @@ export default function PodcastList({ id }: { id: number }) {
           <PodcastTile
             key={`podcast-${podcast.id}-${i}`}
             podcast={podcast}
+            onClick={(podcastId) => setDetailedPodcastId?.(podcastId)}
           />
         ))}
       {isInLimit ? (

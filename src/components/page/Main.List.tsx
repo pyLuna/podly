@@ -1,7 +1,7 @@
 "use client";
 import PodcastList from "../lists/podcast/podcast.list";
 
-export default function MainPageComponent() {
+export default function MainListComponent() {
   return (
     <section>
       <h1>Podcasts</h1>
