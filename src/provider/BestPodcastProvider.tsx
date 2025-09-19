@@ -37,8 +37,8 @@ export default function BestPodcastProvider({
     queryKey: ["best_podcast", podcastId],
     queryFn: async (context) => {
       const result = await getPodcastById(podcastId, context.pageParam);
-      pageRef.current = result.page_number;
-      console.log("currentPageRef", { currentPageRef: pageRef.current });
+      // pageRef.current = context.pageParam;
+      pageRef.current += 1;
       return result;
     },
     getNextPageParam: (lastPage) => {

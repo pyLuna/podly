@@ -56,7 +56,7 @@ export default function PodcastList({ id }: { id: number }) {
         </div>
       ) : (
         <small className="w-full text-center text-gray-500">
-          You've reached the bottom
+          You&apos;ve reached the bottom
         </small>
       )}
     </>
