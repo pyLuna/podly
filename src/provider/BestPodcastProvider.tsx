@@ -7,6 +7,8 @@ import {
   Dispatch,
   SetStateAction,
   useContext,
+  useEffect,
+  useRef,
   useState,
 } from "react";
 
@@ -17,6 +19,8 @@ type BestPodcastContextType = {
   isError: boolean;
   fetchNextPage?: () => void;
   refetch?: () => void;
+  isInLimit: boolean;
+  isFetchingNextPage: boolean;
 };
 
 const BestPodcastContext = createContext<BestPodcastContextType | null>(null);
@@ -27,11 +31,15 @@ export default function BestPodcastProvider({
   children: React.ReactNode;
 }) {
   const [podcastId, setPodcastId] = useState<number>(127);
+  const pageRef = useRef<number>(1);
 
   const best_podcast = useInfiniteQuery({
     queryKey: ["best_podcast", podcastId],
-    queryFn: (context) => {
-      return getPodcastById(podcastId, context.pageParam);
+    queryFn: async (context) => {
+      const result = await getPodcastById(podcastId, context.pageParam);
+      pageRef.current = result.page_number;
+      console.log("currentPageRef", { currentPageRef: pageRef.current });
+      return result;
     },
     getNextPageParam: (lastPage) => {
       if (lastPage.has_next) {
@@ -40,11 +48,16 @@ export default function BestPodcastProvider({
       return undefined;
     },
     getPreviousPageParam: (firstPage) => firstPage.previous_page_number,
-    initialPageParam: 0,
+    refetchOnReconnect: true,
+    initialPageParam: 1,
     retry: 1,
+    refetchOnWindowFocus: false,
     enabled: podcastId !== null,
-    maxPages: 2, // change the limit of pages to 5 in the future
   });
+
+  useEffect(() => {
+    pageRef.current = 1;
+  }, [podcastId]);
 
   return (
     <BestPodcastContext.Provider
@@ -52,10 +65,12 @@ export default function BestPodcastProvider({
         podcasts:
           best_podcast.data?.pages.flatMap((page) => page.podcasts) || [],
         fetchNextPage: best_podcast.fetchNextPage,
-        setPodcastId,
         isLoading: best_podcast.isLoading,
         isError: best_podcast.isError,
         refetch: best_podcast.refetch,
+        isInLimit: pageRef.current <= 5,
+        isFetchingNextPage: best_podcast.isFetchingNextPage,
+        setPodcastId,
       }}
     >
       {children}

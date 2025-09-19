@@ -17,10 +17,13 @@ export default function PodcastList({ id }: { id: number }) {
     isLoading,
     fetchNextPage,
     refetch,
+    isInLimit,
+    isFetchingNextPage,
   } = useBestPodcast();
 
   useEffect(() => {
-    if (inView) {
+    if (!isFetchingNextPage && isInLimit && inView) {
+      console.log("Loading more podcasts...");
       fetchNextPage?.();
     }
   }, [inView]);
@@ -32,7 +35,7 @@ export default function PodcastList({ id }: { id: number }) {
 
   return (
     <>
-      {isLoading && <PodcastListSkeleton />}
+      {isLoading && <PodcastListSkeleton length={10} />}
 
       {best_podcast &&
         best_podcast?.map((podcast: Podcast, i: number) => (
@@ -41,12 +44,18 @@ export default function PodcastList({ id }: { id: number }) {
             podcast={podcast}
           />
         ))}
-      <div
-        ref={ref}
-        className="space-y-4"
-      >
-        <PodcastListSkeleton />
-      </div>
+      {isInLimit ? (
+        <div
+          ref={ref}
+          className="space-y-4"
+        >
+          <PodcastListSkeleton length={1} />
+        </div>
+      ) : (
+        <small className="w-full text-center text-gray-500">
+          You've reached the bottom
+        </small>
+      )}
     </>
   );
 }

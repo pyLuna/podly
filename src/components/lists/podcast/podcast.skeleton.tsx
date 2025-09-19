@@ -1,7 +1,11 @@
 import PodcastTileSkeleton from "./podcast.tile.skeleton";
 
-export default function PodcastListSkeleton() {
-  const skeleton = Array.from({ length: 10 }).map((_, index) => (
+export default function PodcastListSkeleton({
+  length = 10,
+}: {
+  length: number;
+}) {
+  const skeleton = Array.from({ length }).map((_, index) => (
     <PodcastTileSkeleton key={index} />
   ));
   return <>{skeleton}</>;
