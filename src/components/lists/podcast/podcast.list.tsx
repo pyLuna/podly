@@ -44,7 +44,7 @@ export default function PodcastList({ id }: { id: number }) {
           <PodcastTile
             key={`podcast-${podcast.id}-${i}`}
             podcast={podcast}
-            onClick={(podcastId) => setDetailedPodcastId?.(podcastId)}
+            onClick={(v) => setDetailedPodcastId?.(v)}
           />
         ))}
       {isInLimit ? (

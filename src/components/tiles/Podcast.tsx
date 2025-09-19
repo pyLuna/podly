@@ -1,6 +1,5 @@
 import { Podcast } from "@/types/podcast.type";
 import Image from "next/image";
-import Link from "next/link";
 
 export default function PodcastTile({
   podcast,
@@ -14,10 +13,9 @@ export default function PodcastTile({
   };
 
   return (
-    <Link
-      href="#"
+    <button
       onClick={onClick.bind(null, podcast.id)}
-      className="group duration-300"
+      className="group duration-300 cursor-pointer"
     >
       <div className="flex items-start justify-start gap-4 p-2 border border-border rounded-md group-hover:border-primary duration-300">
         <Image
@@ -27,7 +25,7 @@ export default function PodcastTile({
           height={80}
           className="rounded-sm"
         />
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col justify-start text-left gap-1">
           <b className="line-clamp-1 font-bold group-hover:text-primary duration-300">
             {podcast.title}
           </b>
@@ -41,6 +39,6 @@ export default function PodcastTile({
           </small>
         </div>
       </div>
-    </Link>
+    </button>
   );
 }

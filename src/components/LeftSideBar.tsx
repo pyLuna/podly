@@ -45,6 +45,11 @@ export default function LeftSideBar() {
         text="Genres"
         icon={<RadioIcon />}
       />
+      <Button
+        href="/player/123asd"
+        text="Now Playing"
+        icon={<RadioIcon />}
+      />
     </nav>
   );
 }
