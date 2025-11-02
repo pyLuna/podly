@@ -1,4 +1,3 @@
-import LeftSideBar from "@/components/LeftSideBar";
 import MainBody from "@/components/MainBody";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -20,22 +19,16 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-  list,
-  player,
+  children,
 }: Readonly<{
-  list: React.ReactNode;
-  player: React.ReactNode;
+  children: React.ReactNode;
 }>) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased grid grid-cols-[100px_400px_1fr] m-4 max-h-[100vh]`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <LeftSideBar />
-        <MainBody
-          list={list}
-          player={player}
-        />
+        <MainBody>{children}</MainBody>
       </body>
     </html>
   );

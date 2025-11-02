@@ -15,7 +15,7 @@ export default function PodcastTile({
   return (
     <button
       onClick={onClick.bind(null, podcast.id)}
-      className="group duration-300 cursor-pointer"
+      className="w-full group duration-300 cursor-pointer"
     >
       <div className="flex items-start justify-start gap-4 p-2 border border-border rounded-md group-hover:border-primary duration-300">
         <Image

@@ -34,17 +34,17 @@ export default function LeftSideBar() {
   );
 
   return (
-    <nav className="h-full p-4 border-r-border bg-background text-foreground flex flex-col justify-center gap-8">
+    <nav className="h-screen w-[100px] text-foreground flex flex-col justify-center gap-8">
       <Button
         href="/"
         text="Best"
         icon={<StarIcon />}
       />
-      <Button
+      {/* <Button
         href="/genres"
         text="Genres"
         icon={<RadioIcon />}
-      />
+      /> */}
       <Button
         href="/player/123asd"
         text="Now Playing"

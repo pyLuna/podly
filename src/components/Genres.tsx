@@ -1,30 +1,20 @@
 "use client";
-import { getGenres } from "@/service/genres.service";
+import { useGenres } from "@/provider/GenreProvider";
 import { Genre } from "@/types/genre.type";
-import { useQuery } from "@tanstack/react-query";
-import Link from "next/link";
 
 export default function Genres() {
-  const genres = useQuery<Genre[]>({
-    queryKey: ["genres"],
-    queryFn: getGenres,
-    retry: 1,
-  });
+  const { genres, setSelectedGenre } = useGenres();
   return (
-    <div className="rounded-md">
-      <div className="noscrollbar overflow-x-auto">
-        <div className="flex flex-row gap-2">
-          {genres?.data?.map((genre: Genre) => (
-            <Link
-              key={genre.id}
-              className=" border border-secondary/50 text-xs px-3 py-1 rounded hover:bg-secondary/10 transition-colors flex flex-shrink-0"
-              href={`/genres/${genre.name}/${genre.id}`}
-            >
-              {genre.name}
-            </Link>
-          ))}
-        </div>
-      </div>
+    <div className="noscrollbar flex gap-2 overflow-x-auto w-full mb-4 px-2">
+      {genres?.map((genre: Genre) => (
+        <button
+          key={genre.id}
+          className="border-2 border-secondary/50 bg-primary/10 cursor-pointer text-xs px-3 py-1 rounded-full hover:bg-secondary/10 transition-colors flex flex-shrink-0"
+          onClick={() => setSelectedGenre(genre.id)}
+        >
+          {genre.name}
+        </button>
+      ))}
     </div>
   );
 }

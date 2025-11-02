@@ -1,14 +1,16 @@
 "use client";
 import PodcastTile from "@/components/tiles/Podcast";
 import { useBestPodcast } from "@/provider/BestPodcastProvider";
+import { useGenres } from "@/provider/GenreProvider";
 import { useDetailedPodcast } from "@/provider/PodcastProvider";
 import { Podcast } from "@/types/podcast.type";
 import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import PodcastListSkeleton from "./podcast.skeleton";
 
-export default function PodcastList({ id }: { id: number }) {
+export default function PodcastList() {
   const { setPodcastId: setDetailedPodcastId } = useDetailedPodcast();
+  const { selectedGenre: id } = useGenres();
   const { ref, inView } = useInView({
     rootMargin: "1000px",
   });
@@ -36,8 +38,8 @@ export default function PodcastList({ id }: { id: number }) {
   }, [id]);
 
   return (
-    <>
-      {isLoading && <PodcastListSkeleton length={10} />}
+    <div className="noscrollbar flex flex-col overflow-y-auto h-[calc(100vh-130px)] gap-4">
+      {isLoading && <PodcastListSkeleton length={5} />}
 
       {best_podcast &&
         best_podcast?.map((podcast: Podcast, i: number) => (
@@ -59,6 +61,6 @@ export default function PodcastList({ id }: { id: number }) {
           You&apos;ve reached the bottom
         </small>
       )}
-    </>
+    </div>
   );
 }
