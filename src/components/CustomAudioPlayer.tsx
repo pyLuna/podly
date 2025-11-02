@@ -52,14 +52,16 @@ export default function CustomAudioPlayer({
         <div className="flex items-center space-x-2">
           <button
             onClick={() => seekTo(Math.max(0, controls.currentTime - 15))}
-            className="p-2 rounded hover:opacity-80 transition-opacity cursor-pointer"
+            disabled={!src}
+            className="p-2 rounded hover:opacity-80 transition-opacity cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <SkipBack size={16} />
           </button>
 
           <button
             onClick={togglePlayPause}
-            className="p-3 hover:opacity-80 transition-opacity cursor-pointer bg-primary/10 text-primary rounded-full"
+            disabled={!src}
+            className="p-3 hover:opacity-80 transition-opacity cursor-pointer bg-primary/10 text-primary rounded-full disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {controls.isPlaying ? <Pause size={20} /> : <Play size={20} />}
           </button>
@@ -68,7 +70,8 @@ export default function CustomAudioPlayer({
             onClick={() =>
               seekTo(Math.min(controls.duration, controls.currentTime + 15))
             }
-            className="p-2 rounded hover:opacity-80 transition-opacity cursor-pointer"
+            disabled={!src}
+            className="p-2 rounded hover:opacity-80 transition-opacity cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <SkipForward size={16} />
           </button>
@@ -103,34 +106,6 @@ export default function CustomAudioPlayer({
           <span className="text-gray-300">{formatTime(controls.duration)}</span>
         </span>
       </div>
-
-      {/* Volume Control */}
-      {/* <div className="flex items-center space-x-2">
-        <Volume2 size={16} />
-        <input
-          className="appearance-none bg-gray-600 h-1 rounded-lg cursor-pointer text-primary"
-          type="range"
-          min="0"
-          max="1"
-          step="0.1"
-          value={controls.volume}
-          onChange={(e) => setVolume(Number(e.target.value))}
-        />
-      </div> */}
-
-      {/* Playback Speed */}
-      {/* <select
-        value={controls.playbackRate}
-        onChange={(e) => setPlaybackRate(Number(e.target.value))}
-        className="text-xs px-2 py-1 rounded bg-primary"
-      >
-        <option value={0.5}>0.5x</option>
-        <option value={0.75}>0.75x</option>
-        <option value={1}>1x</option>
-        <option value={1.25}>1.25x</option>
-        <option value={1.5}>1.5x</option>
-        <option value={2}>2x</option>
-      </select> */}
     </div>
   );
 }

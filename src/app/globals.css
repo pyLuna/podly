@@ -50,3 +50,11 @@ body {
     }
   }
 }
+
+.noscrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.noscrollbar::-webkit-scrollbar {
+  display: none;
+}

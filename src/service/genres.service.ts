@@ -1,5 +1,6 @@
 "use server";
 
+import { Genre } from "@/types/genre.type";
 import fetcher from "./fetcher";
 
 export const getGenres = async () => {
@@ -8,5 +9,6 @@ export const getGenres = async () => {
     console.error("Failed to fetch genres:", res.statusText, res.status);
     throw new Error("Network response was not ok");
   }
-  return (await res.json()).genres;
+  const data = await res.json();
+  return data.genres as Genre[];
 };

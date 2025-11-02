@@ -1,3 +1,4 @@
+import Genres from "@/components/Genres";
 import Player from "@/components/Player";
 
 export default function PlayerLayout({
@@ -7,8 +8,9 @@ export default function PlayerLayout({
 }) {
   return (
     <div className="content flex flex-col">
-      <Player />
+      <Genres />
       {children}
+      <Player />
     </div>
   );
 }
